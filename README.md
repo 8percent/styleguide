@@ -85,3 +85,31 @@ from django.conf import settings
 
 from apps.users.models import User
 ```
+
+## Class
+
+## Function
+
+## URL
+
+## Permission
+
+## Model
+
+## Form
+
+## Template
+
+## View
+
+## Exception
+
+## Log
+
+## Settings
+
+## Test
+
+## Parenthesis
+
+## Reference
