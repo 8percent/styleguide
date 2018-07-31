@@ -5,15 +5,15 @@ Eight Style
 
 ## Table of Contents
 
-1. [PEP8]()
-1. [Naming]()
-1. [Indenting]()
-1. [Import]()
-1. [Class]()
+1. [PEP8](#pep8)
+1. [Naming](#naming)
+1. [Indenting](#indenting)
+1. [Import](#import)
+1. [Class](#class)
 1. [Comment]()
 1. [Function]()
 1. [URL]()
-1. [Model]()
+1. [Model](#model)
 1. [Form]()
 1. [Template]()
 1. [View]()
