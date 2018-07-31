@@ -56,19 +56,7 @@ def _internal_use_only():
     ...
 ```
 
-2.3 Class
-- `PascalCase`로 클래스의 이름을 정의합니다.
-```python
-class SampleModel(models.Model):
-    ...
-```
-- Python3 버전부터는 기본적으로 object를 명시적으로 상속하지 않아도 됩니다.
-```python
-class EightClass:
-    ...
-```
-
-2.4 Model
+2.3 Model
 - 모델의 이름은 전체 App에서 유일하면 좋습니다. 하지만 의미를 명확하게 하는 것이 더 좋고 중복을 허용합니다.
 ```python
 # 중복 허용
@@ -116,6 +104,19 @@ class SampleClass:
 class SampleClass(object)
 ```
 
+5.2 Class
+- `PascalCase`로 클래스의 이름을 정의합니다.
+```python
+class SampleModel(models.Model):
+    ...
+```
+- Python3 버전부터는 기본적으로 object를 명시적으로 상속하지 않아도 됩니다.
+```python
+class EightClass:
+    ...
+```
+
+
 ## Comment
 - 참고: [구글 스타일](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
 - 문장인 경우: 마침표를 붙입니다.
@@ -131,10 +132,13 @@ class SampleClass(object)
 
 7.2 메서드와 프로퍼티
 - 내부에서 변경(write) 작업이 없으면서 parameter가 없는 조회(read) 함수에 대해서는 다음 기준을 따릅니다.
+
 7.2.1 메서드
 - 내부에서 aggregation이 있을 때, get_oo처럼 작성해서 계산됨을 명시합니다.
+
 7.2.2 프로퍼티
 - 메서드에 해당하지 않는 경우, 프로퍼티로 구현합니다.
+
 7.2.3 cached_property
 - 프로퍼티 중 캐시되어도 문제가 없는 경우
 - 이름 뒤에 "\_cached"를 추가합니다.
