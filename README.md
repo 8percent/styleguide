@@ -5,33 +5,33 @@ Eight Style
 
 ## Table of Contents
 
-1. [PEP8](#pep8)
-1. [Naming](#naming)
-1. [Indenting](#indenting)
+1. [우리의 기준](#우리의-기준)
+1. [주석](#주석)
+1. [괄호](#괄호)
+1. [줄 들여쓰기](#줄-들여쓰기)
+1. [명명법](#명명법)
 1. [Import](#import)
-1. [Class](#class)
-1. [Comment](#comment)
-1. [Function](#function)
-1. [URL](#url)
-1. [Model](#model)
+1. [클래스](#클래스)
+1. [함수와 메서드](#함수와-메서드)
+1. [예외 처리](#예외-처리)
+1. [테스트](#테스트)
+1. [로그](#로그)
+1. [모델](#모델)
 1. [Form](#form)
-1. [Template](#template)
 1. [View](#view)
-1. [Exception](#exception)
-1. [Log](#log)
-1. [Setting](#setting)
-1. [Test](#test)
-1. [Parenthesis](#parenthesis)
+1. [템플릿](#템플릿)
+1. [설정하기](#설정하기)
 1. [Reference](#reference)
 
 
-## PEP8
+## 우리의 기준
 
 [PEP 8](https://www.python.org/dev/peps/pep-0008)
 
-## Naming
 
-2.1 Variable
+## 명명법
+
+2.1 변수 명명법
 - `snake_case`로 변수를 정의합니다.
 ```python
 snake_case_variable = '8percent'
@@ -43,7 +43,14 @@ User = get_user_model()
 ContentType = apps.get_model('contenttypes', 'ContentType')
 ```
 
-2.2 Method
+2.2 클래스 명명법
+- `PascalCase`로 클래스의 이름을 정의합니다.
+```python
+class SampleModel(models.Model):
+    ...
+```
+
+2.3 메서드 명명법
 - `snake_case`로 메서드의 이름을 정의합니다.
 ```python
 def snake_case_name():
@@ -56,29 +63,31 @@ def _internal_use_only():
     ...
 ```
 
-2.3 Model
-- 모델의 이름은 전체 App에서 유일하면 좋습니다. 하지만 의미를 명확하게 하는 것이 더 좋고 중복을 허용합니다.
+2.4 모델 명명법
+- 모델의 이름은 전체 App에서 유일하면 좋습니다. 하지만 의미를 명확하게 하는 것이 더 좋습니다. 중복된 이름도 가능합니다.
 ```python
 # 중복 허용
-apps.transactions.models.Transaction
-apps.accounting.models.Transaction
+eight.models.EightModel
+nine.models.EightModel
 
 # import 할 때, alias를 적극 활용합니다.
-from apps.accounting.models import Transaction as AccountingTransaction
+from nine.model import EightModel as NineEightModel
 ```
 
 
-## Indenting
+## 줄 들여쓰기
 3.1 4-Space를 들여쓰기의 기본 단위로 사용합니다.
 
 
 ## Import
 4.1 한 줄에 하나의 모듈 혹은 메서드를 Import 합니다.
 ```python
+# Good
 import os
 import sys
 
-from django.conf import settings
+# Bad
+import os, sys
 ```
 - 각 그룹 사이에는 빈 줄을 추가합니다.
 - 그룹 위계: Python 표준 library > 3rd party library > application library
@@ -94,35 +103,26 @@ from django.conf import settings
 from apps.users.models import User
 ```
 
-## Class
-5.1 클래스를 정의할 때, object의 상속을 명시하지 않는다.
+
+## 클래스
+- 클래스를 정의할 때 object의 상속을 명시하지 않습니다.
+* Python3 부터 가능합니다.
 ```Python
-# good
-class SampleClass:
-
-# bad
-class SampleClass(object)
-```
-
-5.2 Class
-- `PascalCase`로 클래스의 이름을 정의합니다.
-```python
-class SampleModel(models.Model):
-    ...
-```
-- Python3 버전부터는 기본적으로 object를 명시적으로 상속하지 않아도 됩니다.
-```python
+# Good
 class EightClass:
-    ...
+
+# Bad
+class EightClass(object)
 ```
 
 
-## Comment
+## 주석
 - 참고: [구글 스타일](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
 - 문장인 경우: 마침표를 붙입니다.
 - 문장이 아닌 경우: 마침표를 붙이지 않습니다.
 
-## Function
+
+## 함수와 메서드
 7.1 메서드, 인스턴스 변수 명명법
 참고: [메서드 이름과 인스턴스 변수](https://www.python.org/dev/peps/pep-0008/#method-names-and-instance-variables)
 - 소문자를 사용합니다.
@@ -143,9 +143,8 @@ class EightClass:
 - 프로퍼티 중 캐시되어도 문제가 없는 경우
 - 이름 뒤에 "\_cached"를 추가합니다.
 
-## URL
 
-## Model
+## 모델
 9.1 내부 클래스의 순서는 다음과 같은 순서로 정의합니다.
   - `Fields`
   - `Manager`
@@ -155,17 +154,17 @@ class EightClass:
   - `def get_absolute_url()`
   - `Custom Methods`
 
-9.2 Fields
+9.2 필드
 
-9.3 Manager
+9.3 모델 매니저
 
 9.4 Meta
 - `class Meta`의 `verbose_name`은 최대한 유니크한 이름을 갖도록 합니다.
 >  Admin에서 효과적으로 분류하기 위한 목적입니다.
 
-9.5 save
+9.5 save()
 
-9.6 Instance Method and Property
+9.6 인스턴스 메서드와 프로퍼티
 - 로직 내부에서 변경 작업이 없으면서, 매개변수가 없는 조회함수에 대해 다음 기준을 따른다.
 ```python
 # method 사용
@@ -185,24 +184,20 @@ def some_calculation(self):
     return calculated_value
 ```
 
-- [Manager]()
-- [Property]()
-- [Migration]()
-
 ## Form
 
-## Template
+## 템플릿
 
 ## View
 
-## Exception
+## 예외 처리
 
-## Log
+## 로그
 
-## Settings
+## 설정하기
 
-## Test
+## 테스트
 
-## Parenthesis
+## 괄호
 
 ## Reference
