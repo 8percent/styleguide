@@ -29,6 +29,19 @@ Eight Style
 [PEP 8](https://www.python.org/dev/peps/pep-0008)
 
 
+## 주석
+- 참고: [구글 스타일](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
+- 문장인 경우: 마침표를 붙입니다.
+- 문장이 아닌 경우: 마침표를 붙이지 않습니다.
+
+
+## 괄호
+
+
+## 줄 들여쓰기
+- 4-Space를 들여쓰기의 기본 단위로 사용합니다.
+
+
 ## 명명법
 
 2.1 변수 명명법
@@ -75,10 +88,6 @@ from nine.model import EightModel as NineEightModel
 ```
 
 
-## 줄 들여쓰기
-3.1 4-Space를 들여쓰기의 기본 단위로 사용합니다.
-
-
 ## Import
 4.1 한 줄에 하나의 모듈 혹은 메서드를 Import 합니다.
 ```python
@@ -116,12 +125,6 @@ class EightClass(object)
 ```
 
 
-## 주석
-- 참고: [구글 스타일](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
-- 문장인 경우: 마침표를 붙입니다.
-- 문장이 아닌 경우: 마침표를 붙이지 않습니다.
-
-
 ## 함수와 메서드
 7.1 메서드, 인스턴스 변수 명명법
 참고: [메서드 이름과 인스턴스 변수](https://www.python.org/dev/peps/pep-0008/#method-names-and-instance-variables)
@@ -142,6 +145,15 @@ class EightClass(object)
 7.2.3 cached_property
 - 프로퍼티 중 캐시되어도 문제가 없는 경우
 - 이름 뒤에 "\_cached"를 추가합니다.
+
+
+## 예외 처리
+
+
+## 테스트
+
+
+## 로그
 
 
 ## 모델
@@ -186,18 +198,14 @@ def some_calculation(self):
 
 ## Form
 
-## 템플릿
 
 ## View
 
-## 예외 처리
 
-## 로그
+## 템플릿
+
 
 ## 설정하기
 
-## 테스트
-
-## 괄호
 
 ## Reference
