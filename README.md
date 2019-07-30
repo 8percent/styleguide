@@ -13,4 +13,4 @@ Eight Style Guides
 
 1. [Git](Git/README.md)
 1. [Python](Python)
-1. [Javascrip](Javascript/README.md)
+1. [Javascrip](Javascript)
