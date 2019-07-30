@@ -11,4 +11,4 @@ Eight Style Guides
 
 ## Table of Contents
 
-1. [Git][draft/old_readme.md]
+1. [Git](draft/old_readme.md)
