@@ -12,3 +12,5 @@ Eight Style Guides
 ## Table of Contents
 
 1. [Git](Git/README.md)
+1. [Python](Python/README.md)
+1. [Javascrip](Javascript/README.md)
