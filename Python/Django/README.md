@@ -3,7 +3,7 @@ Django
 
 기본적으로 [Django 공식문서 코드스타일](https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/)의 규칙을 따릅니다.
 
-## Model
+## Model
 
 ### Naming
 
