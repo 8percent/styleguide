@@ -77,11 +77,16 @@ Verbose Name은 최대한 유일한 이름을 갖도록 하여 Admin 화면에�
 [영화 234] DancingQueen 상영여부:True
 ```
 
-## Manager & Class Methods
-모델과 관련된 메서드를 정의할 때, Manager와 Class Method 중에 어떤곳에 정의 해야하는 상황을 구분합니다.
+## Manager
+모델과 관련된 비즈니스 로직을 매니저 메서드로 정의합니다.
 
-복수개가 의도된다면 Manager, 단일 객체에 대한 조회 성격을 가진다면 Model에 정의합니다.
-즉, 함수의 결과값이 queryset 이면 Manager 메서드로, Model 의 Instance 이면 클래스 메서드로 정의합니다.
+### QuerySet Method
+데이터베이스와 관련된 행위의 경우 QuerySet 메서드로 추가합니다.
+
+다음 문서에 나열된 메서드들과 유사한 함수는 QuerySet 메서드라고 볼 수 있습니다.
+[장고 QuerySet](https://docs.djangoproject.com/en/dev/ref/models/querysets/)
+
+
 
 ## Signal
 기본적으로 Signal의 사용을 지양합니다.
