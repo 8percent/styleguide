@@ -48,7 +48,7 @@ OneToOneField, ManyToManyField 도 동일한 규칙을 적용합니다. 단, 복
 - DecimalField를 기본적으로 사용합니다.
 - decimal_places를 4로 지정합니다.
 - max_digits는 최소 4이상으로 지정합니다.
-- 소숫점 형태로 저장합니다. (8.88% (X), 0.0888 (O)
+- 소숫점 형태로 저장합니다. 8.88% (X), 0.0888 (O)
 - API의 경우에 DecimalField를 사용합니다.
 
 #### 금액
