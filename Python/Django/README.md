@@ -48,7 +48,7 @@ OneToOneField, ManyToManyField 도 동일한 규칙을 적용합니다. 단, 복
 - DecimalField를 기본적으로 사용합니다.
 - decimal_places를 4로 지정합니다.
 - max_digits는 최소 4이상으로 지정합니다.
-- 소숫점 형태로 저장합니다. 8.88% (X), 0.0888 (O)
+- 소숫점 형태로 저장합니다. (8.88% (X), 0.0888 (O)
 - API의 경우에 DecimalField를 사용합니다.
 
 #### 금액
@@ -80,13 +80,27 @@ Verbose Name은 최대한 유일한 이름을 갖도록 하여 Admin 화면에�
 ## Manager
 모델과 관련된 비즈니스 로직을 매니저 메서드로 정의합니다.
 
+## Custom Manager
+커스텀 매니저를 정의하는 경우 다음과 같은 규칙을 따릅니다.
+
+- `objects`는 항상 존재하여야 한다. `objects`는 장고의 기본 Manager에 접근하는 convention이기 때문에 이것을 지키도록 한다.
+- `objects`로 지정된 custom model manager는 get_queryset이 필터링되지 않아야 한다. 즉, `Model.objects.all() == Model._default_manager.all()` 이 되어야 한다.
+- 특정 필터링이 필요한 경우, 의미를 전달할 수 있는 명칭을 추가한다. ex) `Transaction.valid.all()`
+- 가능하면 복수형을 쓰도록 한다._
+
 ### QuerySet Method
 데이터베이스와 관련된 행위의 경우 QuerySet 메서드로 추가합니다.
 
 다음 문서에 나열된 메서드들과 유사한 함수는 QuerySet 메서드라고 볼 수 있습니다.
-[장고 QuerySet](https://docs.djangoproject.com/en/dev/ref/models/querysets/)
+> [장고 공식 문서](https://docs.djangoproject.com/en/dev/ref/models/querysets/)
 
+```
+def opened(self):
+  return self.filter(is_opened=True)
 
+def get_total_amount(self):
+    return self.aggregate(sum=Sum('amount'))['sum']
+```
 
 ## Signal
 기본적으로 Signal의 사용을 지양합니다.
