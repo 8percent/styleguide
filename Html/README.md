@@ -4,9 +4,9 @@ HTML
 ## Editor
 에디터의 들여쓰기 규칙은 다음과 같이 설정한다.
 
-Tab size: 2
-Indent: 2
-Continuation Indent: 4
+Tab size: 2  
+Indent: 2  
+Continuation Indent: 4  
 
 ```
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
