@@ -113,6 +113,17 @@ props: {
     default: '',
   },
   props3: {
+    type: Array,
+    default: () => [],
+  },
+  props4: {
+    type: Object,
+    default: () => ({
+      foo: '',
+      bar: 1
+    }),
+  },
+  props5: {
     type: String,
     validator: function (value) {
       // The value must match one of these strings
