@@ -3,7 +3,7 @@ Vue.js
 
 ## 참조
 
-* 현재 레거시 기준 사용빈도가 많은 스타일을 기준으로 정리 함
+* 현재 기준 사용빈도가 많은 스타일을 기준으로 정리 함
 
 ## template
 
@@ -61,6 +61,8 @@ Vue.js
 ```
 
 * `v-if`와 `v-for`는 동시에 사용하지 않고, 조건부 리스트랜더링의 경우 computed속성에서 filter한다.
+* style, class 바인딩은 문자열보다는 객체나 배열로 정의한다.
+* 이벤트바인딩은 반드시 카멜케이스로 작성한다. (케밥케이스 작성 시 미작동)
 
 ## Style
 
@@ -75,6 +77,13 @@ Vue.js
   * pages    : 하나의 라우터를 가지는 페이지 단위 컴퍼넌트
   * modules  : page 단위에서 공통으로 사용되는 모듈화된 컴퍼넌트
   * components : 어플리케이션 전체에서 사용되는 모듈화된 컴퍼넌트
+
+* 컴퍼넌트는 기본적으로 파일명과 일치하나 구분이 필요한 경우 prefix를 붙여준다.
+```javascript
+components: {
+  'el-title': Table,
+},
+```
 
 * 컴퍼넌트의 구성은 다음의 순서를 따르고 사용되는 항목이 없는경우 작성하지 않는다
 ```javascript
@@ -148,9 +157,46 @@ this.$store.commit('Mutation Name', value);
 this.$store.state['State Name']
 ```
 
-* Helper가 필요한 경우 아래와 같이 Helper함수를 이용한다.
+* 스토어는 기능별 모듈화하여 사용 함
+* 기본구성은 아래와 같으며 mutation-type은 선택적 사용
 ```javascript
-(O)
+import request from 'superagent';
+
+export default {
+  namespaced: true,
+
+  state: {
+    state1: '',
+  },
+
+  mutations: {
+    setState(state, value) {
+      state.dealNotice = value;
+    },
+  },
+
+  actions: {
+    fetchData(context, id) {
+      return request
+        .get(`/api/boards/deal-notices/`)
+        .type('json')
+        .accept('json')
+        .then((res) => {
+          context.commit('setState', res.body);
+        });
+    },
+  },
+};
+
+```
+
+* Store
+  * Action은 비동기과정이나 유저의 행위를 정의하여 사용한다.
+  * 컴퍼넌트에서 상태변화를 일으킬때는 mutation보다는 action으로 접근하도록 한다.
+
+* Helper는 편의에 따라 사용되며 다양한 형태로 사용된다.
+```javascript
+// helper함수 이용
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions } = createNamespacedHelpers('[모듈네임]');
 
@@ -158,11 +204,69 @@ const { mapState, mapActions } = createNamespacedHelpers('[모듈네임]');
   '[ActionName]',
 ]),
 
-(X)
+// 모듈과 이름을 같이 사용
 import { mapState, mapActions } from 'vuex'
-
 ...mapActions([
   '[모듈네임]/[ActionName]',
 ]),
+
+
+// 모듈별 구분 (하나의 컴퍼넌트에서 다양한 모듈 Store를 참조할 때)
+import { mapState, mapActions } from 'vuex'
+...mapActions('모듈네임', [
+  'ActionName1',
+  'ActionName2',
+]),
 ```
+
+## 개선할점
+1. Watch의 경우 행위를 Methods로 분리하면 좋을 것 같다.
+```javascript
+// as-is
+
+watch: {
+  watchDataName() {
+    // ...긴 로직
+  },
+},
+
+// to-be
+methods: {
+  todo1() { },
+  todo2() { },
+},
+watch: {
+  watchDataName: {
+    deep: true, // option: object 또는 array를 감시할때 (default: false)
+    immediate: true, // option: 페이지 로드 즉시 실행 (default: false)
+    handler: [
+      'todo1',
+      'todo2',
+      // oldValue값을 참조하거나 파라미터를 전달하는 경우
+      function foo (value, oldValue) {
+
+      },
+    ],
+  }
+}
+```
+
+2. 태그명명과 props바인딩은 케밥케이스보다는 카멜케이스가 혼용되어있고 케밥케이스를 선호하는데 카멜케이스가 더 적합한 것 같다. 
+   * 이유는 HTML테그와 vue component를 분리하여 볼 수 있다.
+   * 이벤트바인딩의 경우 카멜케이스가 필수값이라 하나로 맞추는게 보기에 좋다.
+```javascript
+<datetime-select
+   :startDate="foo"
+   :end-date="bar"
+/>
+
+<DatetimeSelect
+  :startDate="foo"
+/>
+```
+
+1. v-model보다는 value를 직접 관리하는 것이 좋을 것 같다. 
+
+2. /deep/ selector will be deprecated soon 
+   * scss컴파일 과정에서 최종 css에서는 실제 사용되지는 않으나 일반적으로 사용하지 않는 속성으로 대체할 필요성이 있음 (대안: 스타일바인딩 또는 `::v-deep`, `>>>`)
 
