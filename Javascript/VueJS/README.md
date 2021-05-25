@@ -3,23 +3,24 @@ Vue.js
 
 ## 참조
 
-* 현재 기준 사용빈도가 많은 스타일을 기준으로 정리 함
+* 현재 기준 선호되는 스타일을 기준으로 정리 하였습니다.
+* 애메한 경우 주관적인 의견이 포함되어 있습니다.
 
 ## template
 
 * 태그의 명명과 프로퍼티바인딩은 스네이크케이스로 표기한다
 ```html
-(O)  <eight-percent />
-(X)  <EightPercent />
+(O)  <eight-percent/>
+(X)  <EightPercent/>
 ``` 
 
 * Slot영역이 필요없는 경우 축양형으로 표기한다.
 ```html
-(O)  <eight-percent />
-(X)  <EightPercent></EightPercent>
+(O)  <eight-percent/>
+(X)  <eight-percent></eight-percent>
 ```
 
-* 프로퍼티와 어트리뷰트 나열은 줄바꿈 이후 선언한다.
+* 프로퍼티와 어트리뷰트를 여러줄로 내려쓰는 경우 줄바꿈 이후 작성한다.
 ```html
 (O)
 <eight-percent
@@ -28,7 +29,9 @@ Vue.js
 />
 
 (X)
-<eight-percent v-if="loaded" :data-index="dealIndex"/>
+<eight-percent v-if="loaded"
+  :data-index="dealIndex"
+/>
 ```
 
 * 단 순수한 HTML태그에는 많은 요소가 바인딩되지 않는다면 한줄선언을 허용한다
@@ -41,7 +44,7 @@ Vue.js
 ></div>
 ```
 
-* 프로퍼티와 어트리뷰트 나열은 다음의 순서로 진행한다.
+* 프로퍼티와 어트리뷰트 나열은 기본적으로 다음의 순서로 진행한고 중요도에 따라 순서는 조정될 수 있다.
 ```html
 <eight-percent
   // 정적프로퍼티
@@ -68,7 +71,7 @@ Vue.js
 
 * 레이아웃, 믹스인, 변수 등 전역 스타일을 제외한 영역에서 scoped scss를 사용한다 `<style lang="scss" scoped>`
 * 클래스의 명명은 BEM을 따른다.
-* ID선택자는 사용하지 않는다.
+* ID선택자는 반드시 페이지에서 유일함이 보장되어야 하는 테그에만 사용한다.
 
 ## Component
 
@@ -111,6 +114,7 @@ export default {
 
 * Props는 단순나열이 아닌 구체적으로 정의하고 Optional값은 default값을 명시한다.
 * validator는 필요에 따라 선택 적용한다.
+* `required: true`는 없을때 문제가 되야하는 경우에만 사용한다.
 ```javascript
 props: {
   props1: {
@@ -168,14 +172,19 @@ export default {
   state: {
     state1: '',
   },
-
+  getters: {
+    // get + 상태명을 주로 사용하고 의미있는 명사나 상태값과 동일하게 사용하기도 한다.
+    getState1: '',
+  },
   mutations: {
+    // set + 상태명으로 사용하고 상태를 변이시키는 코드가 아닌 포함하지 않는다.
     setState(state, value) {
       state.dealNotice = value;
     },
   },
 
   actions: {
+    // 비동기처리나 행위를 기술하고 네이밍의 제약은 없다.
     fetchData(context, id) {
       return request
         .get(`/api/boards/deal-notices/`)
@@ -192,7 +201,7 @@ export default {
 
 * Store
   * Action은 비동기과정이나 유저의 행위를 정의하여 사용한다.
-  * 컴퍼넌트에서 상태변화를 일으킬때는 mutation보다는 action으로 접근하도록 한다.
+  * 컴퍼넌트에서 상태변화를 일으킬때는 mutation명으로 의미가 전달되지 않는다면 action을 통해서 접근하도록 한다.
 
 * Helper는 편의에 따라 사용되며 다양한 형태로 사용된다.
 ```javascript
@@ -218,6 +227,18 @@ import { mapState, mapActions } from 'vuex'
   'ActionName2',
 ]),
 ```
+
+## Router
+
+1. 라우터 끝에는 '/'를 붙인다. (Django 규칙과 동일하게)
+2. 라우터는 가급적 이름을 가지도록 하고 name으로 사용한다.
+  ```javascript
+    this.$router.push({ 
+      name: '',
+      params: {},
+      query: {},
+    });
+  ```
 
 ## 개선할점
 1. Watch의 경우 행위를 Methods로 분리하면 좋을 것 같다.
