@@ -7,6 +7,11 @@ CSS
 * Flex를 활용한 반응형으로 작성, 모바일과 데스크탑이 상이한 경우에는 적응형
 * 자식 컴퍼넌트의 스타일 수정은 `/deep/` 셀렉터를 사용한다. (style을 props로 내려주는 방식은 잘 사용되지 않는다)
 
+## Layout
+
+* flex 반응형 레이아웃을 기본으로 한다.
+* 복잡한 케이스가 아니라면 모바일 First 스타일을 가질 수 있도록 한다..
+
 ## 기본구조
 ```scss
 @import '~styles/scss/base/media';
@@ -145,53 +150,112 @@ $color-sunshade: #ffa526;
 ```
 
 3. 문단(TEXT) 스타일
+* 사용방법
 ```scss
-@mixin Text-Size-0 {
-  font-weight: bold;
+@import '~styles/scss/mixins/text';
+
+@include Body1(bold);
+@include Body1(400);
+
+// (X)
+@include Body1($fontWeight: 400);
+```
+* 현재 정의된 스타일
+```scss
+@mixin Text-Size-0 ($fontWeight: bold) {
+  font-weight: $fontWeight;
   font-size: 40px;
   line-height: 58px;
   letter-spacing: -1px;
 }
 
-@mixin Text-Size-1 {
-  font-weight: bold;
+@mixin Text-Size-1 ($fontWeight: bold) {
+  font-weight: $fontWeight;
   font-size: 32px;
   line-height: 48px;
   letter-spacing: -1px;
 }
 
-@mixin Text-Size-2 {
-  font-weight: bold;
+@mixin Text-Size-2 ($fontWeight: bold) {
+  font-weight: $fontWeight;
   font-size: 28px;
   line-height: 40px;
   letter-spacing: -0.8px;
 }
 
-@mixin Text-Size-3 {
-  font-weight: bold;
+@mixin Text-Size-3 ($fontWeight: bold) {
+  font-weight: $fontWeight;
   font-size: 24px;
   line-height: 36px;
   letter-spacing: -0.6px;
 }
 
-@mixin Text-Size-4 {
-  font-weight: bold;
+@mixin Text-Size-4 ($fontWeight: bold) {
+  font-weight: $fontWeight;
   font-size: 20px;
   line-height: 30px;
   letter-spacing: -0.5px;
 }
 
-@mixin Text-Size-5 {
-  font-weight: bold;
+@mixin Text-Size-5 ($fontWeight: bold) {
+  font-weight: $fontWeight;
   font-size: 18px;
   line-height: 26px;
   letter-spacing: -0.4px;
 }
 
+@mixin Body1 ($fontWeight: normal) {
+  font-weight: $fontWeight;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+}
+
+
+@mixin Body2 ($fontWeight: normal) {
+  font-weight: $fontWeight;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.6px;
+}
+
+@mixin Sub-Paragraph ($fontWeight: normal) {
+  font-size: 12px;
+  font-weight: $fontWeight;
+  line-height: 18px;
+  letter-spacing: -0.4px;
+}
+
+@mixin Link-Text {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 24px;
+  letter-spacing: -0.6px;
+  color: #3282F0;
+}
+
+
+@mixin Error-Text {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 18px;
+  letter-spacing: -0.4px;
+  color: #D73434;
+}
+
+
+// legacy
 @mixin Text-Size-6 {
   font-weight: bold;
   font-size: 16px;
   line-height: 28px;
+  letter-spacing: -0.3px;
+}
+
+@mixin Text-Size-7 {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 24px;
   letter-spacing: -0.3px;
 }
 
@@ -206,13 +270,6 @@ $color-sunshade: #ffa526;
   font-size: 16px;
   font-weight: normal;
   line-height: 24px;
-  letter-spacing: -0.4px;
-}
-
-@mixin Sub-Paragraph {
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 18px;
   letter-spacing: -0.4px;
 }
 ```
