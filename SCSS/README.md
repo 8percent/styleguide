@@ -6,6 +6,8 @@ CSS
 * BEM Class 명명규칙
 * Flex를 활용한 반응형으로 작성, 모바일과 데스크탑이 상이한 경우에는 적응형
 * 자식 컴퍼넌트의 스타일 수정은 `/deep/` 셀렉터를 사용한다. (style을 props로 내려주는 방식은 잘 사용되지 않는다)
+  * /deep/ selector will be deprecated soon 
+  * scss컴파일 과정에서 사용해도 무방하나 일반적으로 사용하지 않는 방법으로 대체할 필요성이 있음 (대안: 스타일바인딩 또는 `::v-deep`, `>>>`)
 
 ## Layout
 

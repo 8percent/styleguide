@@ -265,18 +265,16 @@ import { mapState, mapActions } from 'vuex'
     });
   ```
 
-## 개선할점
-1. Watch의 경우 행위를 Methods로 분리하면 좋을 것 같다.
-```javascript
-// as-is
-
+## Watch 패턴
+1. Watch는 다음과 같이 정의되어 사용한다.
+```
 watch: {
   watchDataName() {
-    // ...긴 로직
   },
 },
-
-// to-be
+```
+2. 복잡도가 높거나 watch option이 필요한 경우 다음의 형태로 사용한다.
+```
 methods: {
   todo1() { },
   todo2() { },
@@ -295,24 +293,6 @@ watch: {
     ],
   }
 }
-```
+``` 
 
-2. 태그명명과 props바인딩은 케밥케이스보다는 카멜케이스가 혼용되어있고 케밥케이스를 선호하는데 카멜케이스가 더 적합한 것 같다. 
-   * 이유는 HTML테그와 vue component를 분리하여 볼 수 있다.
-   * 이벤트바인딩의 경우 카멜케이스가 필수값이라 하나로 맞추는게 보기에 좋다.
-```javascript
-<datetime-select
-   :startDate="foo"
-   :end-date="bar"
-/>
-
-<DatetimeSelect
-  :startDate="foo"
-/>
-```
-
-1. v-model보다는 value를 직접 관리하는 것이 좋을 것 같다. 
-
-2. /deep/ selector will be deprecated soon 
-   * scss컴파일 과정에서 최종 css에서는 실제 사용되지는 않으나 일반적으로 사용하지 않는 속성으로 대체할 필요성이 있음 (대안: 스타일바인딩 또는 `::v-deep`, `>>>`)
-
+3. computed속성으로 해결할 수 있다면 가급적 사용하지 않는다.
