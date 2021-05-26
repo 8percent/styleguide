@@ -8,7 +8,7 @@ Vue.js
 
 ## template
 
-* 태그의 명명과 프로퍼티바인딩은 스네이크케이스로 표기한다
+* 태그의 명명과 프로퍼티바인딩은 스네이크케이스로 표기한다.
 ```html
 (O)  <eight-percent/>
 (X)  <EightPercent/>
@@ -34,7 +34,7 @@ Vue.js
 />
 ```
 
-* 단 순수한 HTML태그에는 많은 요소가 바인딩되지 않는다면 한줄선언을 허용한다
+* 단 순수한 HTML태그에는 많은 요소가 바인딩되지 않는다면 한줄선언을 허용한다.
 ```html
 (O)
 <div id="foo" class="bar"></div>
@@ -69,9 +69,34 @@ Vue.js
 
 ## Style
 
-* 레이아웃, 믹스인, 변수 등 전역 스타일을 제외한 영역에서 scoped scss를 사용한다 `<style lang="scss" scoped>`
+* 레이아웃, 믹스인, 변수 등 전역 스타일을 제외한 영역에서 scoped scss를 사용한다. `<style lang="scss" scoped>`
 * 클래스의 명명은 BEM을 따른다.
 * ID선택자는 반드시 페이지에서 유일함이 보장되어야 하는 테그에만 사용한다.
+* Module속성은 거의 사용하지 않지만 필요할때 참조하여 사용한다.
+```vue
+// module css 예제
+<script>
+data() {
+  return {
+    color: this.$colors.black,
+    redColor: this.$style.red,
+  };
+}
+</script>
+
+<style lang="scss" module="$colors">
+@import '~styles/scss/base/colors';
+:export {
+  black: $color-gr-700;
+}
+</style>
+
+<style module>
+.red {
+  color: red;
+}
+</style>
+```
 
 ## Component
 
