@@ -15,13 +15,18 @@ CSS
 ## 기본구조
 ```scss
 @import '~styles/scss/base/media';
+// or @import "~styles/scss/mixins/media"; (비슷한 빈도로 사용되고 정의된 breakpoints가 다름)
+
+@import '~styles/scss/mixins/text';
+@import '~styles/scss/base/colors';
 
 .block-class {
   @include Paragraph-14;
 
   &__element {
-    
-    
+    @include Text-Size-3;
+    color: $color-gr-700;
+
     &--modifier {
 
     }
@@ -40,6 +45,15 @@ CSS
 ## 참조 (자주 사용되는 공통 속성)
 1. 반응형 구분
 ```scss
+@import "~styles/scss/mixins/media";
+$breakpoints: (
+  'xs': ( max-width: 359px ),
+  'sm': ( max-width: 767px ),
+  'md': ( min-width: 768px ) and ( max-width: 1079px ),
+  'lg': ( min-width: 768px ),
+);
+
+@import '~styles/scss/base/media';
 $breakpoints: (
   'xs': ( max-width: 359px ),
   'ss': ( max-width: 479px ),
@@ -50,6 +64,15 @@ $breakpoints: (
 ```
 
 2. color
+- 사용방법
+```scss
+@import '~styles/scss/base/colors';
+
+body {
+  color: $color-gr-900;
+}
+```
+- 참조
 ```css
 /* palette
  * 색을 추가할 때는 color-$name 으로 추가하고 적당히 scale 에 맞는 위치에 넣습니다.
@@ -149,7 +172,7 @@ $color-sunshade: #ffa526;
 
 ```
 
-3. 문단(TEXT) 스타일
+1. 문단(TEXT) 스타일
 * 사용방법
 ```scss
 @import '~styles/scss/mixins/text';
