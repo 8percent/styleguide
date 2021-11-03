@@ -117,3 +117,23 @@ def get_total_amount(self):
 - 하나의 모델에 연관되어 있으며 save(), delete() 등에서 처리 가능한 경우
 - 커스텀 모델 매니저 메소드를 이용할 수 있을 때
 - 특정 뷰에만 해당하는 경우
+
+## Choices
+장고 모델 필드의 choices 는 [django-model-utils](https://django-model-utils.readthedocs.io/en/latest/) 에서 제공하는 Choices 를 사용합니다.
+
+- choices는 모델 내부에 작성하는 것을 기본으로 합니다.
+- 만약 여러 모델에 걸쳐 중복되는 choices가 필요한 경우에도 각 모델마다 정의 합니다.
+- 변수명 및 속성은 모두 영어 대문자와 _(언더스코어) 를 조합하여로 작성합니다.
+- 데이터베이스에 저장되는 값은 숫자, 대문자, _(언더스코어) 를 조합하여 작성합니다.
+
+```python
+from model_utils import Choices
+
+class Model:
+    STATE = ****Choices(
+        (1, 'PREPARE', '준비'),
+        (2, 'PROCESS', '진행'),
+        (3, 'COMPLETE', '완료'),
+    )
+    state = models.PositiveSmallIntegerField('상태', choices=STATE)
+```
