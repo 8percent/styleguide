@@ -34,12 +34,35 @@ from apps.accounting.models import Transaction as AccountingTransaction
 
 ### Field
 
+#### 필드 정의
+모델을 정의할 때 인자마다 줄바꿈하여 작성합니다.
+```
+# Good
+user = models.Foreignkey(
+    User, 
+    verbose_name='사용자',
+    on_delete=models.CASCADE,
+)
+
+# Bad
+user = models.Foreignkey(User, 
+                         verbose_name='사용자',
+                         on_delete=models.CASCADE)
+
+# Bad
+user = models.Foreignkey(User, verbose_name='사용자', on_delete=models.CASCADE)
+```
+
 #### ForeignKey
 외래키 필드명은 모델명을 따릅니다.
 verbose_name 또한 동일하게 유지합니다.
 
 ```
-user = models.Foreignkey(User, verbose_name='사용자', on_delete=models.CASCADE)
+user = models.Foreignkey(
+    User, 
+    verbose_name='사용자',
+    on_delete=models.CASCADE,
+)
 ```
 
 OneToOneField, ManyToManyField 도 동일한 규칙을 적용합니다. 단, 복수형이 적절한 경우 복수형을 허용합니다.
