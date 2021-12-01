@@ -95,6 +95,15 @@ lists = [
 ```
 tup = (a, b,)
 lists = ['a','b',]
+
+tup = (
+  'a',
+  'b'
+)
+list = [
+  'a',
+  'b'
+]
 ```
 
 ## Comments
