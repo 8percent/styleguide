@@ -83,10 +83,10 @@ Verbose Name은 최대한 유일한 이름을 갖도록 하여 Admin 화면에�
 ## Custom Manager
 커스텀 매니저를 정의하는 경우 다음과 같은 규칙을 따릅니다.
 
-- `objects`는 항상 존재하여야 한다. `objects`는 장고의 기본 Manager에 접근하는 convention이기 때문에 이것을 지키도록 한다.
-- `objects`로 지정된 custom model manager는 get_queryset이 필터링되지 않아야 한다. 즉, `Model.objects.all() == Model._default_manager.all()` 이 되어야 한다.
-- 특정 필터링이 필요한 경우, 의미를 전달할 수 있는 명칭을 추가한다. ex) `Transaction.valid.all()`
-- 가능하면 복수형을 쓰도록 한다.
+- `objects`는 항상 존재하여야 한다. `objects`는 장고의 기본 Manager에 접근하는 convention이기 때문에 이것을 지키도록 합니다.
+- `objects`로 지정된 custom model manager는 get_queryset이 필터링되지 않아야 합니다. 즉, `Model.objects.all() == Model._default_manager.all()` 이 되어야 합니다.
+- 특정 필터링이 필요한 경우, 의미를 전달할 수 있는 명칭을 추가합니다. ex) `Transaction.valid.all()`
+- 가능하면 복수형을 쓰도록 합니다.
 
 ### QuerySet Method
 데이터베이스와 관련된 행위의 경우 QuerySet 메서드로 추가합니다.
