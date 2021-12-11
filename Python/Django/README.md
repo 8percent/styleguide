@@ -100,6 +100,29 @@ Verbose Name은 최대한 유일한 이름을 갖도록 하여 Admin 화면에�
 [영화 234] DancingQueen 상영여부:True
 ```
 
+### Instance Method
+- 모델 인스턴스의 정보가 변경되어 데이터베이스에 반영되어야 하는 기능이 있을 때 이 기능은 save() 함수를 포함하도록 한다.
+
+```
+# Do
+def publish(self):
+    self.published_at = timezone.now()
+    self.save()
+
+def somewhere(post):
+    post.publish()
+```
+
+```
+# Don't
+def publish(self):
+    self.published_at = timezone.now()
+
+def somewhere(post):
+    post.publish()
+    post.save()
+```
+
 ## Manager
 모델과 관련된 비즈니스 로직을 매니저 메서드로 정의합니다.
 
