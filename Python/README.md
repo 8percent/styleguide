@@ -4,7 +4,7 @@ Python
 파이썬의 코드 스타일은 기본적으로 [PEP8](https://www.python.org/dev/peps/pep-0008/) 에서 제안하는 방식을 지향합니다.
 
 ## Maximum Line Length
-라인별 최고 길이는 79자를 넘지 않도록 합니다.
+라인별 최장 길이는 120자를 넘지 않도록 합니다.
 
 ## Line Break with Binary Operator
 이항 연산자를 사용할 때 연산자 이전에 줄바꿈을 한다.
