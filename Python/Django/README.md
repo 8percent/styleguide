@@ -176,7 +176,7 @@ def get_total_amount(self):
 from model_utils import Choices
 
 class Model:
-    STATE = ****Choices(
+    STATE = Choices(
         (1, 'PREPARE', '준비'),
         (2, 'PROCESS', '진행'),
         (3, 'COMPLETE', '완료'),
