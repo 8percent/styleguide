@@ -142,3 +142,26 @@ def greeting(
     ):
     pass
 ```
+
+
+## f-string with equal sign
+로깅 등의 목적으로 사용될 때, 필요한 경우 등호기호를 활용한다. 다만, 다음 경우에 대해서는 직접 포맷팅을 한다.
+- 구분자로 등호가 아닌 기호를 사용해야하는 경우
+- 평가되는 식과 다른 내용으로 header를 적어야 할 때
+
+### Do
+```python
+logger.info(f'{name = }, {description = }')
+```
+
+### Don't do
+```python
+logger.info(f'name = {name!r}, description = {description!r}')
+```
+
+### Other case
+```python
+logger.info(f'name: {name!r}, description: {description!r}'). # 등호 대신 쌍점 사용이 필요한 경우
+logger.info(f'{a} + {b} = {a + b}')  # 이름이 아닌 실제 값이 쓰여야 해서 {a + b = }로 대체할 수 없는 경우
+logger.info(f'result = {a + b}')  # 식(a + b) 대신 별도의 이름이 필요한 경우
+```
