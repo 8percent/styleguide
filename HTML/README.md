@@ -1,7 +1,7 @@
 HTML
 ====
 
-## Editor
+## 들여쓰기 규칙
 에디터의 들여쓰기 규칙은 다음과 같이 설정합니다.
 
 Tab size: 2  
@@ -17,3 +17,11 @@ Continuation Indent: 4
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 </head>
 ```
+
+## HTML
+
+* 별도의 가이드가 없는 경우 구글의 가이드를 따른다
+  * https://google.github.io/styleguide/htmlcssguide.html#HTML
+
+
+

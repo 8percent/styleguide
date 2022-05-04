@@ -1,8 +1,35 @@
 Vue.js
 ====
 
-## template
+# 컨벤션
 
+- javascript와 vue 코드의 작성은 airbnb와 vue/essential 가이드를 따른다
+  - [aribnb javascript guide](https://github.com/ParkSB/javascript-style-guide)
+  - [vue/essential guide](https://vuejs.org/style-guide/rules-essential.html#use-detailed-prop-definitions)
+- style영역은 scoped scss를 사용하고 클래스의 명명규칙은 BEM을 사용한다
+# 구조
+
+* 컴퍼넌트 구분
+  - components: 어플리케이션 전역에서 사용되는 재사용 가능한 컴퍼넌트
+  - modules: 특정 페이지내에서 사용되는 재사용 가능한 컴퍼넌트
+  - pages: 라우터를 가지는 View 컴퍼넌트
+  - layouts: 라우터의 레이아웃을 정의하는 컴퍼넌트
+
+* Vue 기능관련
+  - store: vuex를 사용하며 기능단위로 상태를 구분
+  - router: 페이지의 진입경로를 관리
+  - directives: 커스텀 directives
+  - filters: 커스텀 filters
+* lib
+  * 외부 서비스의 SDK 또는 라이브러리를 다루는 영역
+* assets
+  * 페이지 내 리소스
+* styles
+  * 페이지 전역 스타일
+* constants
+  * 페이지에서 사용하는 함수
+ 
+## template
 * 태그의 명명과 프로퍼티바인딩은 스네이크케이스로 표기한다.
 ```html
 (O)  <eight-percent/>
@@ -206,13 +233,7 @@ export default {
   actions: {
     // 비동기처리나 행위를 기술하고 네이밍의 제약은 없다.
     fetchData(context, id) {
-      return request
-        .get(`/api/boards/deal-notices/`)
-        .type('json')
-        .accept('json')
-        .then((res) => {
-          context.commit('setState', res.body);
-        });
+      return new Promise((resolve, reject) => {})
     },
   },
 };
