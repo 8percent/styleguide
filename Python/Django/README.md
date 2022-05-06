@@ -34,12 +34,35 @@ from apps.accounting.models import Transaction as AccountingTransaction
 
 ### Field
 
+#### 필드 정의
+모델을 정의할 때 인자마다 줄바꿈하여 작성합니다.
+```
+# Good
+user = models.Foreignkey(
+    User, 
+    verbose_name='사용자',
+    on_delete=models.CASCADE,
+)
+
+# Bad
+user = models.Foreignkey(User, 
+                         verbose_name='사용자',
+                         on_delete=models.CASCADE)
+
+# Bad
+user = models.Foreignkey(User, verbose_name='사용자', on_delete=models.CASCADE)
+```
+
 #### ForeignKey
 외래키 필드명은 모델명을 따릅니다.
 verbose_name 또한 동일하게 유지합니다.
 
 ```
-user = models.Foreignkey(User, verbose_name='사용자', on_delete=models.CASCADE)
+user = models.Foreignkey(
+    User, 
+    verbose_name='사용자',
+    on_delete=models.CASCADE,
+)
 ```
 
 OneToOneField, ManyToManyField 도 동일한 규칙을 적용합니다. 단, 복수형이 적절한 경우 복수형을 허용합니다.
@@ -77,16 +100,39 @@ Verbose Name은 최대한 유일한 이름을 갖도록 하여 Admin 화면에�
 [영화 234] DancingQueen 상영여부:True
 ```
 
+### Instance Method
+- 모델 인스턴스의 정보가 변경되어 데이터베이스에 반영되어야 하는 기능이 있을 때 이 기능은 save() 함수를 포함하도록 한다.
+
+```
+# Do
+def publish(self):
+    self.published_at = timezone.now()
+    self.save()
+
+def somewhere(post):
+    post.publish()
+```
+
+```
+# Don't
+def publish(self):
+    self.published_at = timezone.now()
+
+def somewhere(post):
+    post.publish()
+    post.save()
+```
+
 ## Manager
 모델과 관련된 비즈니스 로직을 매니저 메서드로 정의합니다.
 
 ## Custom Manager
 커스텀 매니저를 정의하는 경우 다음과 같은 규칙을 따릅니다.
 
-- `objects`는 항상 존재하여야 한다. `objects`는 장고의 기본 Manager에 접근하는 convention이기 때문에 이것을 지키도록 한다.
-- `objects`로 지정된 custom model manager는 get_queryset이 필터링되지 않아야 한다. 즉, `Model.objects.all() == Model._default_manager.all()` 이 되어야 한다.
-- 특정 필터링이 필요한 경우, 의미를 전달할 수 있는 명칭을 추가한다. ex) `Transaction.valid.all()`
-- 가능하면 복수형을 쓰도록 한다._
+- `objects`는 항상 존재하여야 한다. `objects`는 장고의 기본 Manager에 접근하는 convention이기 때문에 이것을 지키도록 합니다.
+- `objects`로 지정된 custom model manager는 get_queryset이 필터링되지 않아야 합니다. 즉, `Model.objects.all() == Model._default_manager.all()` 이 되어야 합니다.
+- 특정 필터링이 필요한 경우, 의미를 전달할 수 있는 명칭을 추가합니다. ex) `Transaction.valid.all()`
+- 가능하면 복수형을 쓰도록 합니다.
 
 ### QuerySet Method
 데이터베이스와 관련된 행위의 경우 QuerySet 메서드로 추가합니다.
@@ -117,3 +163,23 @@ def get_total_amount(self):
 - 하나의 모델에 연관되어 있으며 save(), delete() 등에서 처리 가능한 경우
 - 커스텀 모델 매니저 메소드를 이용할 수 있을 때
 - 특정 뷰에만 해당하는 경우
+
+## Choices
+장고 모델 필드의 choices 는 [django-model-utils](https://django-model-utils.readthedocs.io/en/latest/) 에서 제공하는 Choices 를 사용합니다.
+
+- choices는 모델 내부에 작성하는 것을 기본으로 합니다.
+- 만약 여러 모델에 걸쳐 중복되는 choices가 필요한 경우에도 각 모델마다 정의 합니다.
+- 변수명 및 속성은 모두 영어 대문자와 _(언더스코어) 를 조합하여로 작성합니다.
+- 데이터베이스에 저장되는 값은 숫자, 대문자, _(언더스코어) 를 조합하여 작성합니다.
+
+```python
+from model_utils import Choices
+
+class Model:
+    STATE = Choices(
+        (1, 'PREPARE', '준비'),
+        (2, 'PROCESS', '진행'),
+        (3, 'COMPLETE', '완료'),
+    )
+    state = models.PositiveSmallIntegerField('상태', choices=STATE)
+```
