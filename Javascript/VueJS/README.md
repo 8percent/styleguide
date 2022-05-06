@@ -36,14 +36,14 @@ Vue.js
  
  ## Module Import
 
- - 모듈의 Import는 동일한 경로를 제외하고 절대경로를 사용합니다.
+ - 모듈의 Import는 동일한 경로를 제외하고 절대경로를 사용한다.
   ```
   @/components/foo
 
   ./foo
   ```
 
-- js 파일이 아닌 경우 확장자를 표기하고 파일명을 그대로 사용합니다.
+- js 파일이 아닌 경우 확장자를 표기하고 파일명을 변형하지 않는다.
 ```
   @/components/foo.vue;  (O)
   @/components/foo.vue; (X)
@@ -117,7 +117,7 @@ Vue.js
 * 레이아웃, 믹스인, 변수 등 전역 스타일을 제외한 영역에서 scoped scss를 사용한다. `<style lang="scss" scoped>`
 * 클래스의 명명은 BEM을 따른다.
 * ID선택자는 반드시 페이지에서 유일함이 보장되어야 하는 테그에만 사용한다.
-* Module속성은 거의 사용하지 않지만 필요할때 참조하여 사용한다.
+* Module속성은 사용하지 않는다. (기존코드에 포함되어 있고 유사한 형태로 개발이 진행되는 경우에는 사용)
 ```vue
 // module css 예제
 <script>
@@ -146,13 +146,7 @@ data() {
 
 ## Component
 
-* 컴퍼넌트의 구성은 아래와 같은 항묵으로 구분된다.
-  * layouts  : 전체적인 구조 구성을 위한 컴퍼넌트
-  * pages    : 하나의 라우터를 가지는 페이지 단위 컴퍼넌트
-  * modules  : page 단위에서 자체적으로 동작하는 모듈화된 컴퍼넌트
-  * components : 어플리케이션 전체에서 사용되며 상태를 가질 수 없는 컴퍼넌트
-
-* 컴퍼넌트는 기본적으로 파일명과 일치하나 구분이 필요한 경우 prefix를 붙여준다.
+* 컴퍼넌트는 기본적으로 파일명과 일치하는 것을 원칙으로 하고 구분이 필요한 경우 prefix를 붙여준다.
 ```javascript
 components: {
   'el-title': Table,
@@ -217,7 +211,7 @@ props: {
 }
 ```
 
-* 가급적 단방향 데이터흐름을 유지한다.
+* 가급적 단방향 데이터 흐름을 유지한다.
 
 # Store
 * Store의 Vuex 기본문법을 사용하고 스토어의 의존성이 큰 경우 Helper함수를 사용한다.
@@ -230,10 +224,31 @@ this.$store.commit('Mutation Name', value);
 
 // Getter
 this.$store.state['State Name']
+
+// helper함수 이용
+import { createNamespacedHelpers } from 'vuex';
+const { mapState, mapActions } = createNamespacedHelpers('[모듈네임]');
+
+...mapActions([
+  '[ActionName]',
+]),
+
+import { mapState, mapActions } from 'vuex'
+...mapActions([
+  '[모듈네임]/[ActionName]',
+]),
+
+
+// 모듈별 구분 (하나의 컴퍼넌트에서 다양한 모듈 Store를 참조할 때)
+import { mapState, mapActions } from 'vuex'
+...mapActions('모듈네임', [
+  'ActionName1',
+  'ActionName2',
+]),
 ```
 
-* 스토어는 기능별 모듈화하여 사용 함
-* 기본구성은 아래와 같으며 mutation-type은 선택적 사용
+* 스토어는 기능별 모듈화하여 사용 한다.
+* 기본구성은 아래와 같으며 mutation-type은 선택적 사용한다.
 ```javascript
 import request from 'superagent';
 
@@ -264,38 +279,14 @@ export default {
 
 ```
 
-* Store
+* Actions
   * Action은 비동기과정이나 유저의 행위를 정의하여 사용한다.
   * 컴퍼넌트에서 상태변화를 일으킬때는 mutation명으로 의미가 전달되지 않는다면 action을 통해서 접근하도록 한다.
 
-* Helper는 편의에 따라 사용되며 다양한 형태로 사용된다.
-```javascript
-// helper함수 이용
-import { createNamespacedHelpers } from 'vuex';
-const { mapState, mapActions } = createNamespacedHelpers('[모듈네임]');
-
-...mapActions([
-  '[ActionName]',
-]),
-
-// 모듈과 이름을 같이 사용
-import { mapState, mapActions } from 'vuex'
-...mapActions([
-  '[모듈네임]/[ActionName]',
-]),
-
-
-// 모듈별 구분 (하나의 컴퍼넌트에서 다양한 모듈 Store를 참조할 때)
-import { mapState, mapActions } from 'vuex'
-...mapActions('모듈네임', [
-  'ActionName1',
-  'ActionName2',
-]),
-```
 
 ## Router
 
-1. 라우터 끝에는 '/'를 붙인다. (Django 규칙과 동일하게)
+1. 라우터 끝에는 '/'는 붙이지 않는다.
 2. 라우터는 가급적 이름을 가지도록 하고 name으로 사용한다.
   ```javascript
     this.$router.push({ 
