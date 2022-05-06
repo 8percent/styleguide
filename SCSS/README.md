@@ -12,15 +12,13 @@ CSS
 ## Layout
 
 * flex 반응형 레이아웃을 기본으로 한다.
-* 복잡한 케이스가 아니라면 모바일 First 스타일을 가질 수 있도록 한다..
+* 복잡한 케이스가 아니라면 모바일 First 스타일을 가질 수 있도록 한다.
+* 적응형 레이아웃 VUe 디바이스별로 컴퍼넌트를 분리한다.
 
 ## 기본구조
 ```scss
-@import '~styles/scss/base/media';
-// or @import "~styles/scss/mixins/media"; (비슷한 빈도로 사용되고 정의된 breakpoints가 다름)
-
-@import '~styles/scss/mixins/text';
-@import '~styles/scss/base/colors';
+// Color 변수, Text Mixin, Media Mixin을 포함
+@import '@/styles/common-style';
 
 .block-class {
   @include Paragraph-14;
@@ -34,8 +32,6 @@ CSS
     }
   }
 
-  
-
   // 반응형
   @include respond-to(sm) {
     right: 20px;
@@ -47,7 +43,7 @@ CSS
 ## 참조 (자주 사용되는 공통 속성)
 1. 반응형 구분
 ```scss
-@import "~styles/scss/mixins/media";
+@import "@/styles/mixins/_media.scss";
 $breakpoints: (
   'xs': ( max-width: 359px ),
   'sm': ( max-width: 767px ),
@@ -55,7 +51,7 @@ $breakpoints: (
   'lg': ( min-width: 768px ),
 );
 
-@import '~styles/scss/base/media';
+@import '@/styles/base/_media.scss';
 $breakpoints: (
   'xs': ( max-width: 359px ),
   'ss': ( max-width: 479px ),
@@ -68,7 +64,7 @@ $breakpoints: (
 2. color
 - 사용방법
 ```scss
-@import '~styles/scss/base/colors';
+@import '@/styles/base/_colors.scss';
 
 body {
   color: $color-gr-900;
