@@ -7,6 +7,7 @@ Vue.js
   - [aribnb javascript guide](https://github.com/ParkSB/javascript-style-guide)
   - [vue/essential guide](https://vuejs.org/style-guide/rules-essential.html#use-detailed-prop-definitions)
 - style영역은 scoped scss를 사용하고 클래스의 명명규칙은 BEM을 사용한다
+
 # 구조
 
 * 컴퍼넌트 구분
@@ -20,15 +21,37 @@ Vue.js
   - router: 페이지의 진입경로를 관리
   - directives: 커스텀 directives
   - filters: 커스텀 filters
+
 * lib
-  * 외부 서비스의 SDK 또는 라이브러리를 다루는 영역
+  - 외부 서비스의 SDK 또는 라이브러리를 다루는 영역
+
 * assets
-  * 페이지 내 리소스
+  - 페이지 내 리소스
+
 * styles
-  * 페이지 전역 스타일
+  - 페이지 전역 스타일
+
 * constants
-  * 페이지에서 사용하는 함수
+  - 페이지에서 사용하는 함수
  
+ ## Module Import
+
+ - 모듈의 Import는 동일한 경로를 제외하고 절대경로를 사용합니다.
+  ```
+  @/components/foo
+
+  ./foo
+  ```
+
+- js 파일이 아닌 경우 확장자를 표기하고 파일명을 그대로 사용합니다.
+```
+  @/components/foo.vue;  (O)
+  @/components/foo.vue; (X)
+
+  @import '@/scss/base/_colors.scss';  (O)
+  @import '@/scss/base/colors.scss';  (X)
+```
+
 ## template
 * 태그의 명명과 프로퍼티바인딩은 스네이크케이스로 표기한다.
 ```html
@@ -107,7 +130,8 @@ data() {
 </script>
 
 <style lang="scss" module="$colors">
-@import '~styles/scss/base/colors';
+@import '@/scss/base/_colors.scss';
+
 :export {
   black: $color-gr-700;
 }
