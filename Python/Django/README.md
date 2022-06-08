@@ -167,8 +167,8 @@ def get_total_amount(self):
 ## Choices
 장고 모델 필드의 choices 는 [enumeration-types](https://docs.djangoproject.com/en/3.2/ref/models/fields/#enumeration-types) 를 사용합니다.
 
-- choices는 모델 내부에 작성하는 것을 기본으로 합니다.
-- 만약 여러 모델에 걸쳐 중복되는 choices가 필요한 경우에도 각 모델마다 정의 합니다.
+- choices 는 모델 내부에 작성하는 것을 기본으로 합니다.
+- 만약 여러 모델에 걸쳐 중복되는 choices 가 필요한 경우에도 각 모델마다 정의합니다.
 - 변수명 및 속성은 모두 영어 대문자와 _(언더스코어) 를 조합하여로 작성합니다.
 - 데이터베이스에 저장되는 값은 숫자, 대문자, _(언더스코어) 를 조합하여 작성합니다.
 - chocies 의 클래스명은 단수를 사용합니다. 끝에 Choices 를 붙이지 않습니다.
