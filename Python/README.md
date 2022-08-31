@@ -96,39 +96,60 @@ list = [
 [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)의 룰을 따른다.
 
 ## Multi-line Parameter
-매개 변수 여러개가 있을 때 줄바꿈은 다음과 같은 방식으로 할 수 있다.
+함수 정의 시, 매개변수 리스트의 길이가 긴 경우 줄바꿈은 다음과 같은 방식으로 할 수 있다.
+- [관련 논의](https://github.com/8percent/styleguide/discussions/39)
 
-#### 매개변수가 2개인 경우
+- PEP8 스타일
+  - 첫 매개변수가, 매개변수 리스트를 여는 괄호와 같은 줄에 위치
+  - 이후 라인에서는 들여쓰기를 첫 매개변수와 맞춤
+  - 한 줄에 두 개 이상의 매개변수를 적지 않음
+  - 매개변수 리스트를 닫는 괄호는 마지막 매개변수와 같은 줄에 위치(trailing comma 불필요)
+- black 스타일
+  - 첫 매개변수가, 매개변수 리스트를 여는 괄호의 다음 줄에 위치
+  - 모든 매개변수는 1-level 들여쓰기 적용
+  - 한 줄에 두 개 이상의 매개변수를 적지 않음
+  - 매개변수 리스트를 닫는 괄호는 마지막 매개변수 다음 줄에 위치(trailing comma 필요)
+
+### Do
+```python
+# PEP8 스타일
+def function(argument1,
+             argument2,
+             argument3: bool,
+             argument4: Optional[int] = None) -> None:
+    ...
+
+
+# black 스타일
+def function(
+    argument1,
+    argument2,
+    argument3: bool,
+    argument4: Optional[int] = None,
+) -> None:
+    ...
 ```
-def greeting('안녕', 'hello'):
-    pass
 
-def greeting('안녕',
-             'hello'):
-    pass
+### Don't do
+```python
+# 들여쓰기가 1-level이 아닌 경우
+def function(
+        argument1,
+        argument2,
+        argument3: bool,
+        argument4: Optional[int] = None,
+) -> None:
+    ...
 
-def greeting(
-        '안녕',
-        'hello',
-    ):
-    pass
-```  
 
-#### 매개변수가 3개 이상인 경우
+# 첫 매개변수 라인으로 들여쓰기 했지만, 닫는 괄호가 독립된 줄에 있는 경우
+def function(argument1,
+             argument2,
+             argument3: bool,
+             argument4: Optional[int] = None,
+) -> None:
+    ...
 ```
-def greeting('안녕',
-             'hello',
-             'hola'):
-    pass
-
-def greeting(
-        '안녕',
-        'hello',
-        'hola',
-    ):
-    pass
-```
-
 
 ## f-string with equal sign
 로깅 등의 목적으로 사용될 때, 필요한 경우 등호기호를 활용한다. 다만, 다음 경우에 대해서는 직접 포맷팅을 한다.
