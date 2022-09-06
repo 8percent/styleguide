@@ -191,5 +191,5 @@ s2 = "I'm a programmer."
 ### Don't
 ```python
 s1 = "Hello"  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
-s2 = 'I\'m a programmer'  # 큰 따옴표 대신 escape sequence를 사용한 경우
+s2 = 'I\'m a programmer.'  # 큰 따옴표 대신 escape sequence를 사용한 경우
 ```
