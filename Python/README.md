@@ -172,3 +172,28 @@ logger.info(f'name: {name!r}, description: {description!r}'). # 등호 대신 �
 logger.info(f'{a} + {b} = {a + b}')  # 이름이 아닌 실제 값이 쓰여야 해서 {a + b = }로 대체할 수 없는 경우
 logger.info(f'result = {a + b}')  # 식(a + b) 대신 별도의 이름이 필요한 경우
 ```
+
+## String Quotes
+docstring을 제외한 리터럴 문자열에 사용되는 따옴표에 대해,
+관련 [PEP8 항목](https://peps.python.org/pep-0008/#string-quotes)에서는 따옴표에 대한 규칙이 없다.
+[내부 논의](https://github.com/8percent/styleguide/discussions/33)를 통해 정한 다음 규칙을 따른다.
+- 요약: `str.__repr__`을 따른다.
+  - 항상 작은 따옴표를 우선 사용한다.
+  - 작은 따옴표를 포함하는 문자열에 한해서 큰 따옴표를 사용한다.
+  - 작은 따옴표와 큰 따옴표를 "모두" 포함하는 문자열에서는 작은 따옴표를 사용한다.
+
+### Do
+```python
+s1 = 'Hello'  # 기본적으로 작은 따옴표 사용
+s2 = "I'm a programmer."  # 작은 따옴표가 들어있을 때에는 큰 따옴표를 사용
+s3 = 'It is "Python"'  # 작은 따옴표 사용(큰 따옴표가 들어있을 때)
+s4 = 'It\'s "Python"'  # 작은 따옴표 사용(작은/큰 따옴표가 모두 들어있을 때)
+```
+
+### Don't
+```python
+s1 = "Hello"  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
+s2 = 'I\'m a programmer.'  # 큰 따옴표 대신 escape sequence를 사용한 경우
+s3 = "It is \"Python\""  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
+s4 = "It's \"Python\""  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
+```
