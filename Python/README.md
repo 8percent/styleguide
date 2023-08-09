@@ -1,43 +1,37 @@
 Python
 ====
 
-파이썬의 코드 스타일은 기본적으로 [PEP8](https://www.python.org/dev/peps/pep-0008/) 에서 제안하는 방식을 지향합니다.
-여기에 추가로 다음 formatter를 적용합니다.
-- isort
-  + [공식 문서](https://pycqa.github.io/isort/)
-  + [현재 설정](https://github.com/8percent/eight/blob/master/.isort.cfg)
-- flake8
-  + [공식 문서](https://flake8.pycqa.org/en/latest/)
-  + [현재 설정](https://github.com/8percent/eight/blob/master/.flake8)
+기본적으로 [PEP8](https://www.python.org/dev/peps/pep-0008/)의 스타일을 따릅니다. 그리고 저희들은 일관된 스타일을 작성하는데 도움을 주는 다양한 도구들을 활용하고 있습니다.
+- [pre-commit](https://pre-commit.com/)
+- [black](https://black.readthedocs.io/en/stable/)
+- [isort](https://pycqa.github.io/isort/)
+- [flake8](https://flake8.pycqa.org/en/latest/)
 
+### black
+위의 여러가지 도구중에 가장 중심이 되는것은 black 입니다. black 에서 기본값으로 지정된 설정들을 따르고 있습니다. 
+black에서 만들어주는 코드의 스타일은 [이곳](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)에서 확인할 수 있습니다.
 
-## Maximum Line Length
-isort, flake8 설정을 따른다. 현재 120자.
-
-## Line Break with Binary Operator
-이항 연산자를 사용할 때 연산자 이전에 줄바꿈을 한다.
-
-#### Do
+### isort
+[black & isort](https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#isort)
 ```
-total = (principal
-         + interest
-         - tax)
+[tool.isort]
+profile = "black"
 ```
 
-#### Don't
+### flake8
+[black & flake8](https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#flake8)
 ```
-total = (principal +
-         interest -
-         tax)
+max-line-length = 88
+extend-ignore = E203
 ```
 
-## Imports
-isort 설정을 따른다.
+## 이외의 규칙
 
-## Module Level Dunder
-모듈 레벨의 던더(`__all__`, `__version__` 등)들은 모듈 Docstring 하단에 그리고 일반적인 모듈 임포트 위에 위치하도록 한다.
 
-```
+### Module Level Dunder
+모듈 레벨의 던더(`__all__`, `__version__` 등)들은 모듈 Docstring 하단에 그리고 일반적인 모듈 임포트 위에 위치하도록 합니다.
+
+```python
 """Module Docstring Sample
 
 Blah Blah
@@ -49,151 +43,78 @@ import sys
 import os
 ```
 
-## Class
-클래스를 정의할 때는 최상위 클래스 object 상속을 명시하지 않고 생략한다.
+### Class
+클래스를 정의할 때는 최상위 클래스 object 상속을 명시하지 않고 생략합니다.
 
 #### Do
-```
+```python
 class Movie:
     pass
 ```
 
 #### Don't
-```
+```python
 class Movie(object):
     pass
 ```
 
 
-## Trailing Commas
-Trailing Comma는 요소가 하나인 튜플을 표기하거나, 줄바꿈을 하는데 버전 관리 툴로 Diff를 보기 편한 경우 붙인다.
-
-#### Do
-```
-tup = (a,)
-lists = [
-  'a',
-  'b',
-]
-```
-
-#### Don't
-```
-tup = (a, b,)
-lists = ['a','b',]
-
-tup = (
-  'a',
-  'b'
-)
-list = [
-  'a',
-  'b'
-]
-```
-
-## Comments
-[Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)의 룰을 따른다.
-
-## Multi-line Parameter
-함수 정의 시, 매개변수 리스트의 길이가 긴 경우 줄바꿈은 다음과 같은 방식으로 할 수 있다.
-- [관련 논의](https://github.com/8percent/styleguide/discussions/39)
-
-- PEP8 스타일
-  - 첫 매개변수가, 매개변수 리스트를 여는 괄호와 같은 줄에 위치
-  - 이후 라인에서는 들여쓰기를 첫 매개변수와 맞춤
-  - 한 줄에 두 개 이상의 매개변수를 적지 않음
-  - 매개변수 리스트를 닫는 괄호는 마지막 매개변수와 같은 줄에 위치(trailing comma 불필요)
-- black 스타일
-  - 첫 매개변수가, 매개변수 리스트를 여는 괄호의 다음 줄에 위치
-  - 모든 매개변수는 1-level 들여쓰기 적용
-  - 한 줄에 두 개 이상의 매개변수를 적지 않음
-  - 매개변수 리스트를 닫는 괄호는 마지막 매개변수 다음 줄에 위치(trailing comma 필요)
-
-### Do
+### Comments
+[Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)의 룰을 따릅니다 .
 ```python
-# PEP8 스타일
-def function(argument1,
-             argument2,
-             argument3: bool,
-             argument4: Optional[int] = None) -> None:
-    ...
+def fetch_smalltable_rows(
+    table_handle: smalltable.Table,
+    keys: Sequence[bytes | str],
+    require_all_keys: bool = False,
+) -> Mapping[bytes, tuple[str, ...]]:
+    """Fetches rows from a Smalltable.
 
+    Retrieves rows pertaining to the given keys from the Table instance
+    represented by table_handle.  String keys will be UTF-8 encoded.
 
-# black 스타일
-def function(
-    argument1,
-    argument2,
-    argument3: bool,
-    argument4: Optional[int] = None,
-) -> None:
-    ...
+    Args:
+        table_handle: An open smalltable.Table instance.
+        keys: A sequence of strings representing the key of each table
+          row to fetch.  String keys will be UTF-8 encoded.
+        require_all_keys: If True only rows with values set for all keys will be
+          returned.
+
+    Returns:
+        A dict mapping keys to the corresponding table row data
+        fetched. Each row is represented as a tuple of strings. For
+        example:
+
+        {b'Serak': ('Rigel VII', 'Preparer'),
+         b'Zim': ('Irk', 'Invader'),
+         b'Lrrr': ('Omicron Persei 8', 'Emperor')}
+
+        Returned keys are always bytes.  If a key from the keys argument is
+        missing from the dictionary, then that row was not found in the
+        table (and require_all_keys must have been False).
+
+    Raises:
+        IOError: An error occurred accessing the smalltable.
+    """
 ```
 
-### Don't do
-```python
-# 들여쓰기가 1-level이 아닌 경우
-def function(
-        argument1,
-        argument2,
-        argument3: bool,
-        argument4: Optional[int] = None,
-) -> None:
-    ...
-
-
-# 첫 매개변수 라인으로 들여쓰기 했지만, 닫는 괄호가 독립된 줄에 있는 경우
-def function(argument1,
-             argument2,
-             argument3: bool,
-             argument4: Optional[int] = None,
-) -> None:
-    ...
-```
-
-## f-string with equal sign
+### f-string with equal sign
 로깅 등의 목적으로 사용될 때, 필요한 경우 등호기호를 활용한다. 다만, 다음 경우에 대해서는 직접 포맷팅을 한다.
 - 구분자로 등호가 아닌 기호를 사용해야하는 경우
 - 평가되는 식과 다른 내용으로 header를 적어야 할 때
 
-### Do
+#### Do
 ```python
 logger.info(f'{name = }, {description = }')
 ```
 
-### Don't do
+#### Don't do
 ```python
 logger.info(f'name = {name!r}, description = {description!r}')
 ```
 
-### Other case
+#### Other case
 ```python
 logger.info(f'name: {name!r}, description: {description!r}'). # 등호 대신 쌍점 사용이 필요한 경우
 logger.info(f'{a} + {b} = {a + b}')  # 이름이 아닌 실제 값이 쓰여야 해서 {a + b = }로 대체할 수 없는 경우
 logger.info(f'result = {a + b}')  # 식(a + b) 대신 별도의 이름이 필요한 경우
-```
-
-## String Quotes
-docstring을 제외한 리터럴 문자열에 사용되는 따옴표에 대해,
-관련 [PEP8 항목](https://peps.python.org/pep-0008/#string-quotes)에서는 따옴표에 대한 규칙이 없다.
-[내부 논의](https://github.com/8percent/styleguide/discussions/33)를 통해 정한 다음 규칙을 따른다.
-- 요약: `str.__repr__`을 따른다.
-  - 항상 작은 따옴표를 우선 사용한다.
-  - 작은 따옴표를 포함하는 문자열에 한해서 큰 따옴표를 사용한다.
-  - 작은 따옴표와 큰 따옴표를 "모두" 포함하는 문자열에서는 작은 따옴표를 사용한다.
-
-### Do
-```python
-s1 = 'Hello'  # 기본적으로 작은 따옴표 사용
-s2 = "I'm a programmer."  # 작은 따옴표가 들어있을 때에는 큰 따옴표를 사용
-s3 = 'It is "Python"'  # 작은 따옴표 사용(큰 따옴표가 들어있을 때)
-s4 = 'It\'s "Python"'  # 작은 따옴표 사용(작은/큰 따옴표가 모두 들어있을 때)
-```
-
-### Don't
-```python
-s1 = "Hello"  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
-s2 = 'I\'m a programmer.'  # 큰 따옴표 대신 escape sequence를 사용한 경우
-s3 = "It is \"Python\""  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
-s4 = "It's \"Python\""  # 작은 따옴표가 아닌 큰 따옴표를 사용한 경우
 ```
