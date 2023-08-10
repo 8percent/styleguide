@@ -104,17 +104,17 @@ def fetch_smalltable_rows(
 
 #### Do
 ```python
-logger.info(f'{name = }, {description = }')
+logger.info(f"{name = }, {description = }")
 ```
 
 #### Don't do
 ```python
-logger.info(f'name = {name!r}, description = {description!r}')
+logger.info(f"name = {name!r}, description = {description!r}")
 ```
 
 #### Other case
 ```python
-logger.info(f'name: {name!r}, description: {description!r}'). # 등호 대신 쌍점 사용이 필요한 경우
-logger.info(f'{a} + {b} = {a + b}')  # 이름이 아닌 실제 값이 쓰여야 해서 {a + b = }로 대체할 수 없는 경우
-logger.info(f'result = {a + b}')  # 식(a + b) 대신 별도의 이름이 필요한 경우
+logger.info(f"name: {name!r}, description: {description!r}") # 등호 대신 쌍점 사용이 필요한 경우
+logger.info(f"{a} + {b} = {a + b}")  # 이름이 아닌 실제 값이 쓰여야 해서 {a + b = }로 대체할 수 없는 경우
+logger.info(f"result = {a + b}")  # 식(a + b) 대신 별도의 이름이 필요한 경우
 ```
