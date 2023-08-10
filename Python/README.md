@@ -8,7 +8,7 @@ Python
 - [flake8](https://flake8.pycqa.org/en/latest/)
 
 ### black
-위의 여러가지 도구중에 가장 중심이 되는것은 black 입니다. black 에서 기본값으로 지정된 설정들을 따르고 있습니다. 
+위의 여러 가지 도구중에 가장 중심이 되는 것은 black입니다. black에서 기본값으로 지정된 설정을 따르고 있습니다.
 black에서 만들어주는 코드의 스타일은 [이곳](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)에서 확인할 수 있습니다.
 
 ### isort
