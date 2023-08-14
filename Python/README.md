@@ -1,7 +1,10 @@
 Python
 ====
 
-기본적으로 [PEP8](https://www.python.org/dev/peps/pep-0008/)의 스타일을 따릅니다. 그리고 저희들은 일관된 스타일을 작성하는데 도움을 주는 다양한 도구들을 활용하고 있습니다.
+기본적으로 [PEP8](https://www.python.org/dev/peps/pep-0008/)의 스타일을 따릅니다.
+
+## 코드 스타일 도구
+일관된 스타일을 작성하는데 도움을 주는 다양한 도구들을 활용하고 있습니다.
 - [pre-commit](https://pre-commit.com/)
 - [black](https://black.readthedocs.io/en/stable/)
 - [isort](https://pycqa.github.io/isort/)
@@ -24,6 +27,52 @@ profile = "black"
 max-line-length = 88
 extend-ignore = E203
 ```
+
+## Type Hinting
+함수를 정의할 때는 매개변수와 반환형에 대한 타입 힌트도 추가합니다. 타입 힌트의 최대 활용 범위는 코드 작성자 재량에 맡깁니다.
+
+#### Do
+```python
+def greeting(name: str) -> str:
+    words = "Hello " + name
+    return words
+
+
+def greeting(name: str) -> str:
+    words: str = "Hello " + name
+    return words
+```
+
+#### Don't do
+```python
+def greeting(name):
+    return "Hello " + name
+```
+
+인스턴스 메서드 첫 인자(self), 클래스 메서드 첫 인자(cls)에는 타입 힌트를 생략합니다.
+
+#### Do
+```python
+class Car:
+    def move(self, goal: str) -> str:
+        return "Move to " + goal
+
+    def get_name(cls) -> str:
+        return "My Car"
+```
+
+return을 통해 값을 반환하지 않는 함수는 반환형 타입 힌트를 생략할 수 있습니다.
+
+#### Do
+```python
+def show_movie(name: str):
+    print("Hello " + name)
+
+
+def show_movie(name: str) -> None:
+    print("Hello " + name)
+```
+
 
 ## 이외의 규칙
 
