@@ -53,24 +53,18 @@ def greeting(name):
 
 #### Do
 ```python
+import typing_extensions import Self
+
 class Car:
     def move(self, goal: str) -> str:
         return "Move to " + goal
 
+    def follow(self, other: Self) -> str:
+        return "Follow"
+
+    @classmethod
     def get_name(cls) -> str:
         return "My Car"
-```
-
-return을 통해 값을 반환하지 않는 함수는 반환형 타입 힌트를 생략할 수 있습니다.
-
-#### Do
-```python
-def show_movie(name: str):
-    print("Hello " + name)
-
-
-def show_movie(name: str) -> None:
-    print("Hello " + name)
 ```
 
 
