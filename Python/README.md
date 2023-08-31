@@ -67,6 +67,20 @@ class Car:
         return "My Car"
 ```
 
+return을 통해 값을 반환하지 않는 함수에서도 반환형을 명시합니다(`None`).
+
+#### Do
+```python
+def show_movie(name: str) -> None:
+    print("Hello " + name)
+
+
+def show_movie(name: str) -> None:
+    if not name:
+        return
+    print("Hello " + name)
+```
+
 
 ## 이외의 규칙
 
