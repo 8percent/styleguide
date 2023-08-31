@@ -67,7 +67,7 @@ class Car:
         return "My Car"
 ```
 
-return을 통해 값을 반환하지 않는 함수에는 반환형 타입 힌트으로 None을 적습니다.
+return을 통해 값을 반환하지 않는 함수에서도 반환형을 명시합니다(`None`).
 
 #### Do
 ```python
