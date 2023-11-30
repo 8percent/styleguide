@@ -190,3 +190,23 @@ class Model(models.Model):
         default=State.PREPARE.value,
     )
 ```
+
+## View
+
+View 함수에서 반환하는 HTTPResponse 타입 객체를 생성할 때, HTTP 상태 코드가 200이라면 status 매개변수는 입력하지 않습니다.
+
+#### Do
+```python
+from django.http.response import HttpResponse
+
+HttpResponse()
+HttpResponse(status=204)
+```
+
+#### Don’t
+```python
+from django.http.response import HttpResponse
+
+HttpResponse(status=200)
+HttpResponse(status=204)
+```
