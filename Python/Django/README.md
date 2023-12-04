@@ -208,5 +208,4 @@ HttpResponse(status=204)
 from django.http.response import HttpResponse
 
 HttpResponse(status=200)
-HttpResponse(status=204)
 ```
