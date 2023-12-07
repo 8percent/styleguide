@@ -28,46 +28,9 @@ max-line-length = 88
 extend-ignore = E203
 ```
 
-## Type Hinting
-함수를 정의할 때는 매개변수와 반환형에 대한 타입 힌트도 추가합니다. 타입 힌트의 최대 활용 범위는 코드 작성자 재량에 맡깁니다.
+## Type Annotation
+타입 힌트의 활용은 코드 작성자 재량에 맡깁니다.
 
-#### Do
-```python
-def greeting(name: str) -> str:
-    words = "Hello " + name
-    return words
-
-
-def greeting(name: str) -> str:
-    words: str = "Hello " + name
-    return words
-```
-
-#### Don't do
-```python
-def greeting(name):
-    return "Hello " + name
-```
-
-인스턴스 메서드 첫 인자(self), 클래스 메서드 첫 인자(cls)에는 타입 힌트를 생략합니다.
-
-#### Do
-```python
-import typing_extensions import Self
-
-class Car:
-    def move(self, goal: str) -> str:
-        return "Move to " + goal
-
-    def follow(self, other: Self) -> str:
-        return "Follow"
-
-    @classmethod
-    def get_name(cls) -> str:
-        return "My Car"
-```
-
-return을 통해 값을 반환하지 않는 함수에서도 반환형을 명시합니다(`None`).
 
 #### Do
 ```python
