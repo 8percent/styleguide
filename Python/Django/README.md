@@ -10,13 +10,13 @@ Django
 모델의 이름은 프로젝트 내에서 유일하면 좋습니다. 하지만 의미를 명확하게 하는 것이 더 좋고 이에 따른 중복을 허용합니다.
 
 다음과 같은 중복을 허용합니다.
-```
+```python
 apps.transactions.models.Transaction
 apps.accounting.models.Transaction
 ```
 
 중복으로 발생할 수 있는 작은 문제들을 해결하기 위해 다음과같은 Alias를 적극 활용합니다.
-```
+```python
 from apps.accounting.models import Transaction as AccountingTransaction
 ```
 
@@ -36,7 +36,7 @@ from apps.accounting.models import Transaction as AccountingTransaction
 
 #### 필드 정의
 모델을 정의할 때 인자마다 줄바꿈하여 작성합니다.
-```
+```python
 # Good
 user = models.Foreignkey(
     User, 
@@ -57,7 +57,7 @@ user = models.Foreignkey(User, verbose_name='사용자', on_delete=models.CASCAD
 외래키 필드명은 모델명을 따릅니다.
 verbose_name 또한 동일하게 유지합니다.
 
-```
+```python
 user = models.Foreignkey(
     User, 
     verbose_name='사용자',
@@ -103,7 +103,7 @@ Verbose Name은 최대한 유일한 이름을 갖도록 하여 Admin 화면에�
 ### Instance Method
 - 모델 인스턴스의 정보가 변경되어 데이터베이스에 반영되어야 하는 기능이 있을 때 이 기능은 save() 함수를 포함하도록 한다.
 
-```
+```python
 # Do
 def publish(self):
     self.published_at = timezone.now()
@@ -113,7 +113,7 @@ def somewhere(post):
     post.publish()
 ```
 
-```
+```python
 # Don't
 def publish(self):
     self.published_at = timezone.now()
@@ -140,7 +140,7 @@ def somewhere(post):
 다음 문서에 나열된 메서드들과 유사한 함수는 QuerySet 메서드라고 볼 수 있습니다.
 > [장고 공식 문서](https://docs.djangoproject.com/en/dev/ref/models/querysets/)
 
-```
+```python
 def opened(self):
   return self.filter(is_opened=True)
 
