@@ -1,5 +1,4 @@
-Eight Style Guides
-===========
+# Eight Style Guides
 
 ## Purpose
 
@@ -13,9 +12,11 @@ Eight Style Guides
 
 ## Table of Contents
 
+- [Dart](Dart)
+  - [Flutter](Dart/Flutter)
 - [Git](Git)
 - [Python](Python)
-    - [Django](Python/Django)
+  - [Django](Python/Django)
 - [Javascript](Javascript)
-    - [VueJS](Javascript/VueJS)
+  - [VueJS](Javascript/VueJS)
 - [HTML](HTML)
