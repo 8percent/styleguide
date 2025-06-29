@@ -31,38 +31,46 @@ Jira 이슈 키 뒤에 브랜치 작업 내용을 생략할 수 있으나, 가�
 `상품-목록-API-오류-해결`  
 
 ## Commit Message
-커밋 메시지는 다음과같은 형태로 작성합니다.
-첫 줄의 커밋 메시지로 변경사항을 어느정도 인지할 수 있도록 작성합니다.
+
+팀에서는 [Conventional Commits](https://www.conventionalcommits.org/) 규칙을 따르며, `conventional-pre-commit` 훅을 통해 자동으로 검증합니다.
+
+**형식**: `<type>: <description>`
+
+**Types**:
+- **feat**: 새로운 기능 추가
+- **fix**: 버그 수정
+- **refactor**: 코드 리팩토링 (기능 변경 없음)
+- **test**: 테스트 추가 또는 수정
+- **docs**: 문서 수정
+- **style**: 코드 포맷팅, 세미콜론 누락 등 (기능 변경 없음)
+- **chore**: 빌드 프로세스나 보조 도구 변경
+
+**상세 설명이 필요한 경우**:
 ```
-{PREFIX}: 변경 사항 요약
+<type>: <간단한 요약>
 
 상세 설명
 
 #Issue, Bug, Sentry link
 ```
 
-여기서 PREFIX는 다음 중 적절한 것을 사용합니다.
-- ADD: 기능 추가
-- CHG: 기능 변경
-- FIX: 오류 수정
-- REF: 리팩토링
-- DEL: 제거
-
 #### Do
-`ADD: 투자 시리얼라이저 추가`  
-`DEL: 투자 뷰 제거`  
-`FIX: PEP8 수정`  
+`feat: add investment serializer`  
+`fix: correct PEP8 violations`  
+`refactor: remove unused recruitment app`  
 ```
-FIX: 타입 수정  
+fix: correct interest calculation rounding
 
-타입 오류로 인해 발생한 장애 대응
+이자 계산 시 반올림 방식 변경으로 정확도 개선
 
 # https://Sentry.io/issue=123
 ```
 
 #### Don't
-`투자 뷰 추가`  
-`CHG: 로직 변경`  
+`투자 뷰 추가` (타입 없음)  
+`chore: 로직 변경` (부정확한 타입)  
+
+**참고**: Pre-commit 훅이 자동으로 커밋 메시지 형식을 검증합니다.
 
 ## Pull Request
 
